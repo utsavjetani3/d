@@ -18,23 +18,23 @@ export default function AdminDashboard() {
   return (
     <div className="max-w-7xl mx-auto w-full">
       <FadeIn>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12 gap-4 md:gap-6">
           <div>
             <h1 className="text-3xl font-black text-foreground mb-2 tracking-tight">Daily Overview</h1>
             <p className="text-gray-400 text-sm font-bold uppercase tracking-widest">Marketplace performance for Neem products.</p>
           </div>
-          <div className="flex gap-4">
-            <button className="bg-white hover:bg-brand-beige text-gray-500 px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest border border-brand-green/10 transition-all soft-shadow">
+          <div className="flex flex-wrap gap-3 md:gap-4 w-full md:w-auto">
+            <button className="bg-white hover:bg-brand-beige text-gray-500 px-4 md:px-6 py-3 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest border border-brand-green/10 transition-all soft-shadow flex-1 md:flex-none">
               Report.PDF
             </button>
-            <button className="bg-brand-green hover:bg-brand-green/90 text-white px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-brand-green/20">
+            <button className="bg-brand-green hover:bg-brand-green/90 text-white px-5 md:px-8 py-3 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-brand-green/20 flex-1 md:flex-none">
               Download CSV
             </button>
           </div>
         </div>
       </FadeIn>
 
-      <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 mb-8 md:mb-12">
         {[
           { label: "Gross Revenue", value: "$12,840", change: "+12.4%", icon: DollarSign, color: "text-brand-green", bg: "bg-brand-green/10" },
           { label: "Orders Fulfilled", value: "842", change: "+18.2%", icon: ShoppingBasket, color: "text-brand-light-green", bg: "bg-brand-light-green/10" },
@@ -42,8 +42,8 @@ export default function AdminDashboard() {
           { label: "Conversion", value: "4.82%", change: "+0.8%", icon: Activity, color: "text-brand-green", bg: "bg-brand-green/5" },
         ].map((stat, idx) => (
           <StaggerItem key={idx}>
-            <div className="bg-white p-8 rounded-[2.5rem] border border-brand-green/5 soft-shadow group hover:border-brand-green/20 transition-all">
-              <div className="flex justify-between items-start mb-6">
+            <div className="bg-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-brand-green/5 soft-shadow group hover:border-brand-green/20 transition-all">
+              <div className="flex justify-between items-start mb-5 md:mb-6">
                 <div className={`p-4 rounded-2xl ${stat.bg}`}>
                   <stat.icon className={`w-6 h-6 ${stat.color}`} />
                 </div>
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
                 </span>
               </div>
               <div>
-                <h3 className="text-3xl font-black text-foreground mb-2 tracking-tighter">{stat.value}</h3>
+                <h3 className="text-2xl md:text-3xl font-black text-foreground mb-2 tracking-tighter">{stat.value}</h3>
                 <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em]">{stat.label}</p>
               </div>
             </div>
@@ -62,7 +62,7 @@ export default function AdminDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <FadeIn delay={0.2} className="lg:col-span-2">
-          <div className="bg-white p-8 rounded-[3rem] border border-brand-green/5 soft-shadow h-[450px]">
+          <div className="bg-white p-5 md:p-8 rounded-[2rem] md:rounded-[3rem] border border-brand-green/5 soft-shadow min-h-[340px] md:h-[450px]">
             <div className="flex items-center justify-between mb-10">
               <h3 className="text-sm font-black text-foreground uppercase tracking-widest">Sales Velocity</h3>
               <div className="flex items-center gap-4">
@@ -72,7 +72,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
             </div>
-            <div className="w-full h-[320px]">
+            <div className="w-full h-[220px] md:h-[320px]">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
@@ -95,8 +95,8 @@ export default function AdminDashboard() {
         </FadeIn>
 
         <FadeIn delay={0.3} className="lg:col-span-1">
-          <div className="bg-white p-8 rounded-[3rem] border border-brand-green/5 soft-shadow h-[450px] flex flex-col">
-            <h3 className="text-sm font-black text-foreground uppercase tracking-widest mb-8">Recent Activity</h3>
+          <div className="bg-white p-5 md:p-8 rounded-[2rem] md:rounded-[3rem] border border-brand-green/5 soft-shadow min-h-[340px] md:h-[450px] flex flex-col">
+            <h3 className="text-sm font-black text-foreground uppercase tracking-widest mb-6 md:mb-8">Recent Activity</h3>
             <div className="flex-grow overflow-auto space-y-4 pr-2">
               {[
                 { item: "Organic Neem Sticks", user: "Rajesh K.", price: "$12.99", status: "Fulfilled" },
@@ -106,7 +106,7 @@ export default function AdminDashboard() {
                 { item: "Dried Bark", user: "Sanjay M.", price: "$9.99", status: "Fulfilled" },
               ].map((sale, i) => (
                 <div key={i} className="flex justify-between items-center p-4 rounded-2xl hover:bg-brand-beige transition-all border border-transparent hover:border-brand-green/10">
-                  <div className="max-w-[140px]">
+                  <div className="max-w-[170px] md:max-w-[140px]">
                     <p className="text-sm font-bold text-foreground truncate">{sale.item}</p>
                     <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest truncate">{sale.user}</p>
                   </div>

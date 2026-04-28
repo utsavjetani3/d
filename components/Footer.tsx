@@ -3,9 +3,9 @@ import { Leaf, MessageCircle, Globe, User, Camera, Share2 } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-beige pt-24 pb-12 mt-auto border-t border-brand-green/5">
+    <footer className="bg-brand-beige pt-14 md:pt-24 pb-10 md:pb-12 mt-auto border-t border-brand-green/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 mb-12 md:mb-16">
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <div className="p-2 bg-brand-green rounded-xl">
@@ -16,7 +16,7 @@ export default function Footer() {
                 <span className="text-[8px] font-bold text-gray-400 tracking-widest uppercase leading-none mt-1">લીમડા નું દાતણ</span>
               </div>
             </Link>
-            <p className="text-gray-500 text-sm leading-relaxed mb-8">
+            <p className="text-gray-500 text-sm leading-relaxed mb-6 md:mb-8">
               Experience the ancient wisdom of natural oral care. Our premium Neem Datun products are sourced sustainably to bring you the best of nature.
             </p>
             <div className="flex space-x-4">
@@ -63,11 +63,11 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="pt-12 border-t border-brand-green/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">
+        <div className="pt-8 md:pt-12 border-t border-brand-green/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6">
+          <p className="text-gray-400 text-[11px] md:text-xs font-bold uppercase tracking-widest">
             &copy; {new Date().getFullYear()} NEEM DATUN INC. TRADITIONAL CARE.
           </p>
-          <div className="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+          <div className="flex flex-wrap gap-4 md:gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
             <span>Sustainably Sourced</span>
             <span>100% Natural</span>
           </div>

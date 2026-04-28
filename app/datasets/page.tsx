@@ -17,14 +17,14 @@ const ALL_PRODUCTS = [
 
 export default function DatasetsPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 md:pt-8 pb-14 md:pb-20">
       <FadeIn>
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-green/10 text-brand-green text-[10px] font-black uppercase tracking-[0.2em] mb-2 rounded-full">
             Natural Care
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-foreground mb-3 tracking-tight">Our Products</h1>
-          <p className="text-gray-500 text-lg max-w-2xl font-medium leading-relaxed">
+          <h1 className="text-3xl md:text-5xl font-black text-foreground mb-3 tracking-tight">Our Products</h1>
+          <p className="text-gray-500 text-base md:text-lg max-w-2xl font-medium leading-relaxed">
             Pure, herbal oral care solutions inspired by centuries of Ayurvedic tradition.
           </p>
         </div>
@@ -33,12 +33,12 @@ export default function DatasetsPage() {
       <div className="flex flex-col gap-8">
         {/* Main Content */}
         <div className="flex-grow">
-          <FadeIn delay={0.1} className="mb-10 w-full max-w-2xl">
+          <FadeIn delay={0.1} className="mb-8 md:mb-10 w-full max-w-2xl">
             <div className="relative group">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300 group-focus-within:text-brand-green transition-colors" />
               <input
                 type="text"
-                className="w-full pl-16 pr-6 py-4 bg-white border border-brand-green/5 rounded-2xl text-foreground placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-brand-green/5 transition-all font-medium soft-shadow text-sm"
+                className="w-full pl-14 md:pl-16 pr-4 md:pr-6 py-3.5 md:py-4 bg-white border border-brand-green/5 rounded-2xl text-foreground placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-brand-green/5 transition-all font-medium soft-shadow text-sm"
                 placeholder="Search for Neem, Datun, or Herbal care..."
               />
             </div>

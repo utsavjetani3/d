@@ -16,19 +16,19 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative pt-0 pb-20 md:pt-0 md:pb-24 overflow-hidden">
+      <section className="relative pt-0 pb-14 md:pt-0 md:pb-24 overflow-hidden">
         {/* Abstract Background Shapes */}
-        <div className="absolute top-0 right-0 w-[50%] h-[100%] bg-brand-mint rounded-l-[5rem] -z-10 opacity-30"></div>
+        <div className="absolute top-0 right-0 w-3/4 md:w-[50%] h-full bg-brand-mint rounded-l-[3rem] md:rounded-l-[5rem] -z-10 opacity-30"></div>
         <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-brand-yellow rounded-full -z-10 blur-3xl opacity-20"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
             <FadeIn direction="right" className="text-left">
-              <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-8 text-foreground leading-[1.1] md:leading-[0.9]">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 md:mb-8 text-foreground leading-[1.1] md:leading-[0.95] lg:leading-[0.9]">
                 Natural Tooth Care with <span className="text-brand-green">Neem Datun</span>
               </h1>
               
-              <p className="text-lg md:text-2xl text-gray-500 max-w-xl mb-12 font-medium leading-relaxed">
+              <p className="text-base sm:text-lg md:text-2xl text-gray-500 max-w-xl mb-8 md:mb-12 font-medium leading-relaxed">
                 Relieve toothache & strengthen gums naturally. Experience the traditional secret to lifelong oral health.
               </p>
               
@@ -38,7 +38,7 @@ export default function Home() {
                     Shop Natural Datun
                   </Button>
                 </Link>
-                <div className="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white border border-brand-green/10 shadow-sm">
+                <div className="flex items-center gap-4 px-4 md:px-6 py-3 md:py-4 rounded-2xl bg-white border border-brand-green/10 shadow-sm">
                   <div className="flex -space-x-2">
                     {[1, 2, 3].map(i => (
                       <div key={i} className="w-8 h-8 rounded-full bg-brand-mint border-2 border-white flex items-center justify-center text-[10px] font-bold text-brand-green">
@@ -66,10 +66,10 @@ export default function Home() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-32 bg-white relative z-10">
+      <section className="py-20 md:py-32 bg-white relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 tracking-tight">The Power of Pure Neem</h2>
+          <div className="text-center mb-14 md:mb-24">
+            <h2 className="text-3xl md:text-5xl font-black text-foreground mb-6 tracking-tight">The Power of Pure Neem</h2>
             <p className="text-gray-500 max-w-2xl mx-auto text-lg font-medium">Ancient healing properties refined for modern daily use.</p>
           </div>
           
@@ -95,11 +95,11 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-32 bg-brand-beige/50">
+      <section className="py-20 md:py-32 bg-brand-beige/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 md:mb-20 gap-6 md:gap-8">
             <div className="text-left">
-              <h2 className="text-4xl font-black text-foreground mb-4 tracking-tight">Our Herbal Selection</h2>
+              <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4 tracking-tight">Our Herbal Selection</h2>
               <p className="text-gray-500 text-lg font-medium">Sustainably harvested and carefully packaged.</p>
             </div>
             <Link href="/datasets">
@@ -120,16 +120,16 @@ export default function Home() {
       </section>
 
       {/* Trust Section - Asymmetrical */}
-      <section className="py-32 overflow-hidden">
+      <section className="py-20 md:py-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-brand-green rounded-[4rem] p-12 md:p-24 flex flex-col md:flex-row items-center gap-16 relative overflow-hidden">
+          <div className="bg-brand-green rounded-[2.5rem] md:rounded-[4rem] p-6 sm:p-8 md:p-24 flex flex-col md:flex-row items-center gap-10 md:gap-16 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
             
             <div className="flex-1 text-white">
-              <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight">100% Traditional, <br /> 100% Effective.</h2>
+              <h2 className="text-3xl md:text-6xl font-black mb-8 leading-tight">100% Traditional,<br className="hidden sm:block" /> 100% Effective.</h2>
               <ul className="space-y-6 mb-12">
                 {["Pesticide Free", "Cruelty Free", "Zero Plastic Packaging", "Biodegradable"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 font-bold text-lg">
+                  <li key={i} className="flex items-center gap-3 font-bold text-base md:text-lg">
                     <CheckCircle2 className="w-6 h-6 text-brand-light-green" /> {item}
                   </li>
                 ))}
@@ -138,9 +138,9 @@ export default function Home() {
             </div>
             
             <div className="flex-1">
-              <div className="bg-white/10 backdrop-blur-md p-10 rounded-[3rem] border border-white/20">
+              <div className="bg-white/10 backdrop-blur-md p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-white/20">
                 <div className="text-center mb-8">
-                  <p className="text-5xl font-black text-white mb-2">98%</p>
+                  <p className="text-4xl md:text-5xl font-black text-white mb-2">98%</p>
                   <p className="text-brand-light-green font-bold uppercase tracking-widest text-xs">Customer Satisfaction</p>
                 </div>
                 <div className="space-y-6">
