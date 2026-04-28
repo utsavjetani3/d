@@ -58,3 +58,30 @@ export const useCart = create<CartStore>()(
     }
   )
 );
+export interface User {
+  name: string;
+  phone: string;
+  isAdmin: boolean;
+}
+
+interface UserStore {
+  user: User | null;
+  login: (name: string, phone: string) => void;
+  logout: () => void;
+}
+
+export const useUser = create<UserStore>()(
+  persist(
+    (set) => ({
+      user: null,
+      login: (name, phone) => {
+        const isAdmin = phone === "3344334434";
+        set({ user: { name, phone, isAdmin } });
+      },
+      logout: () => set({ user: null }),
+    }),
+    {
+      name: 'datavault-user',
+    }
+  )
+);

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import WelcomeLoader from "@/components/WelcomeLoader";
 import ClientFooter from "@/components/ClientFooter";
+import MainWrapper from "@/components/MainWrapper";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -19,12 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} antialiased`}>
-      <body className="min-h-screen flex flex-col bg-background text-foreground font-sans">
+      <body className="min-h-screen flex flex-col bg-background text-foreground font-sans overflow-x-hidden">
         <WelcomeLoader />
         <Navbar />
-        <main className="flex-grow pt-24">
+        <MainWrapper>
           {children}
-        </main>
+        </MainWrapper>
         <ClientFooter />
       </body>
     </html>

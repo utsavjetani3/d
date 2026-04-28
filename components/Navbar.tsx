@@ -2,34 +2,45 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { Leaf, Search, ShoppingCart, User, Menu, X, Globe } from "lucide-react";
+import { Leaf, Search, ShoppingCart, User, Menu, X, Globe, LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useCart } from "@/lib/store";
+import { useCart, useUser } from "@/lib/store";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { items } = useCart();
+  const { user, logout } = useUser();
   const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
   const pathname = usePathname();
   const { scrollY } = useScroll();
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkIsDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+    checkIsDesktop();
+    window.addEventListener("resize", checkIsDesktop);
+    return () => window.removeEventListener("resize", checkIsDesktop);
+  }, []);
+
+  if (pathname.startsWith("/admin")) return null;
 
   // Animations based on scroll
-  const navWidth = useTransform(scrollY, [0, 50], ["100%", "90%"]);
-  const navTop = useTransform(scrollY, [0, 50], ["0px", "20px"]);
-  const navRadius = useTransform(scrollY, [0, 50], ["0px", "24px"]);
-  const navShadow = useTransform(scrollY, [0, 50], ["none", "0 20px 40px rgba(0,0,0,0.08)"]);
+  const navWidth = useTransform(scrollY, [0, 50], isDesktop ? ["100%", "90%"] : ["100%", "100%"]);
+  const navTop = useTransform(scrollY, [0, 50], isDesktop ? ["0px", "20px"] : ["0px", "0px"]);
+  const navRadius = useTransform(scrollY, [0, 50], isDesktop ? ["0px", "24px"] : ["0px", "0px"]);
+  const navShadow = useTransform(scrollY, [0, 50], isDesktop ? ["none", "0 20px 40px rgba(0,0,0,0.08)"] : ["none", "none"]);
   const navBg = useTransform(scrollY, [0, 50], ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 0.8)"]);
 
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Our Products", href: "/datasets" },
     { name: "Benefits", href: "/benefits" },
-    { name: "Our Story", href: "/about" },
+    ...(user?.isAdmin ? [{ name: "Admin Panel", href: "/admin" }] : []),
   ];
 
   return (
-    <div className="fixed top-0 left-0 w-full flex justify-center z-[100] px-4 pointer-events-none">
+    <div className="fixed top-0 left-0 w-full flex justify-center z-[100] px-2 md:px-4 pointer-events-none">
       <motion.nav
         style={{
           width: navWidth,
@@ -38,28 +49,27 @@ export default function Navbar() {
           boxShadow: navShadow,
           backgroundColor: navBg,
         }}
-        className="pointer-events-auto backdrop-blur-xl border border-brand-green/5 relative overflow-hidden group"
+        className="pointer-events-auto backdrop-blur-xl border border-brand-green/5 relative overflow-hidden group w-full max-w-7xl"
       >
         {/* Subtle Gradient Line at top */}
         <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-green/20 to-transparent"></div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="px-4 md:px-10">
           <div className="flex items-center justify-between h-20 md:h-24">
             {/* Logo Section */}
             <div className="flex-shrink-0">
-              <Link href="/" className="flex items-center gap-3 group/logo">
+              <Link href="/" className="flex items-center gap-2 md:gap-3 group/logo">
                 <motion.div 
                   whileHover={{ rotate: 15, scale: 1.1 }}
-                  className="p-2.5 bg-brand-green rounded-[1.2rem] shadow-lg shadow-brand-green/20"
+                  className="p-2 md:p-2.5 bg-brand-green rounded-xl md:rounded-[1.2rem] shadow-lg shadow-brand-green/20"
                 >
-                  <Leaf className="text-white w-6 h-6" />
+                  <Leaf className="text-white w-5 h-5 md:w-6 md:h-6" />
                 </motion.div>
                 <div className="flex flex-col">
-                  <span className="font-black text-xl md:text-2xl tracking-tighter text-brand-green leading-none">
+                  <span className="font-black text-lg md:text-2xl tracking-tighter text-brand-green leading-none">
                     NEEM DATUN
                   </span>
-                  <span className="text-[9px] font-black text-gray-400 tracking-[0.25em] uppercase leading-none mt-1.5 flex items-center gap-1.5">
-                    <Globe className="w-2.5 h-2.5 opacity-50" />
+                  <span className="text-[7px] md:text-[9px] font-black text-gray-400 tracking-[0.2em] md:tracking-[0.25em] uppercase leading-none mt-1 flex items-center gap-1">
                     લીમડા નું દાતણ
                   </span>
                 </div>
@@ -119,12 +129,29 @@ export default function Navbar() {
                 </Link>
               </div>
 
-              <Link href="/auth/login" className="relative group/btn">
-                <div className="absolute inset-0 bg-brand-green blur-lg opacity-0 group-hover/btn:opacity-20 transition-opacity"></div>
-                <div className="relative bg-brand-green text-white px-8 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest hover:translate-y-[-2px] active:translate-y-[0px] transition-all duration-300 shadow-xl shadow-brand-green/20">
-                  Login
+              {user ? (
+                <div className="flex items-center gap-4">
+                  <div className="flex flex-col items-end">
+                    <span className="text-[10px] font-black text-foreground uppercase tracking-tight leading-none">{user.name}</span>
+                    <button 
+                      onClick={logout}
+                      className="text-[8px] font-bold text-red-400 hover:text-red-500 uppercase tracking-widest mt-1 flex items-center gap-1"
+                    >
+                      <LogOut className="w-2 h-2" /> Logout
+                    </button>
+                  </div>
+                  <div className="w-10 h-10 bg-brand-green/10 rounded-xl flex items-center justify-center text-brand-green font-black text-xs">
+                    {user.name.substring(0, 2).toUpperCase() || "U"}
+                  </div>
                 </div>
-              </Link>
+              ) : (
+                <Link href="/auth/login" className="relative group/btn">
+                  <div className="absolute inset-0 bg-brand-green blur-lg opacity-0 group-hover/btn:opacity-20 transition-opacity"></div>
+                  <div className="relative bg-brand-green text-white px-8 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest hover:translate-y-[-2px] active:translate-y-[0px] transition-all duration-300 shadow-xl shadow-brand-green/20">
+                    Login
+                  </div>
+                </Link>
+              )}
             </div>
 
             {/* Mobile Actions */}
@@ -172,13 +199,25 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="pt-6 border-t border-brand-green/5">
-              <Link 
-                href="/auth/login" 
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center bg-brand-green text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-brand-green/20"
-              >
-                Login / Sign Up
-              </Link>
+              {user ? (
+                <button 
+                  onClick={() => {
+                    logout();
+                    setIsOpen(false);
+                  }}
+                  className="w-full flex items-center justify-center bg-red-50 text-red-500 py-5 rounded-2xl font-black text-sm uppercase tracking-widest"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link 
+                  href="/auth/login" 
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center bg-brand-green text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-brand-green/20"
+                >
+                  Login / Sign Up
+                </Link>
+              )}
             </div>
           </div>
         </motion.div>

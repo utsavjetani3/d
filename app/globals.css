@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-green: #4CAF50;
-  --color-brand-light-green: #A8E063;
+  --color-brand-green: #1B5E20;
+  --color-brand-light-green: #2E7D32;
   --color-brand-beige: #F9F7F2;
   --color-brand-mint: #E8F5E9;
   --color-brand-yellow: #FFF9C4;
   
   --color-background: #FCFBF7;
-  --color-foreground: #2D3436;
+  --color-foreground: #1A1A1A;
   --color-card: #FFFFFF;
   --color-card-border: rgba(0, 0, 0, 0.05);
   --color-input: #FFFFFF;
@@ -16,7 +16,7 @@
 
 @layer utilities {
   .soft-shadow {
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.12);
   }
   .clean-border {
     @apply border border-black/5;
@@ -45,6 +45,8 @@ html,
 body {
   padding: 0;
   margin: 0;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 a {

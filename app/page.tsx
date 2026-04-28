@@ -24,17 +24,17 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <FadeIn direction="right" className="text-left">
-              <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 text-foreground leading-[0.9]">
+              <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-8 text-foreground leading-[1.1] md:leading-[0.9]">
                 Natural Tooth Care with <span className="text-brand-green">Neem Datun</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-gray-500 max-w-xl mb-12 font-medium leading-relaxed">
+              <p className="text-lg md:text-2xl text-gray-500 max-w-xl mb-12 font-medium leading-relaxed">
                 Relieve toothache & strengthen gums naturally. Experience the traditional secret to lifelong oral health.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-6">
-                <Link href="/datasets">
-                  <Button size="lg" className="px-12 py-6 text-xl">
+                <Link href="/datasets" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full px-12 py-6 text-lg md:text-xl">
                     Shop Natural Datun
                   </Button>
                 </Link>
@@ -51,7 +51,7 @@ export default function Home() {
               </div>
             </FadeIn>
             
-            <FadeIn delay={0.2} direction="left" className="relative">
+            <FadeIn delay={0.2} direction="left" className="relative hidden lg:block">
               <div className="aspect-square bg-white rounded-[3rem] shadow-2xl p-12 flex items-center justify-center relative overflow-hidden group">
                 <div className="absolute inset-0 bg-brand-green opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
                 <Leaf className="w-48 h-48 text-brand-green group-hover:scale-110 transition-transform duration-700" />
@@ -73,7 +73,7 @@ export default function Home() {
             <p className="text-gray-500 max-w-2xl mx-auto text-lg font-medium">Ancient healing properties refined for modern daily use.</p>
           </div>
           
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {[
               { title: "Relieves Toothache", desc: "Natural analgesic properties soothe sensitive nerves.", icon: Shield },
               { title: "Kills Bacteria", desc: "Strong anti-microbial action for total oral hygiene.", icon: Zap },
@@ -122,7 +122,7 @@ export default function Home() {
       {/* Trust Section - Asymmetrical */}
       <section className="py-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-brand-green rounded-[4rem] p-12 md:p-24 flex flex-col md:flex-row items-center gap-16 relative">
+          <div className="bg-brand-green rounded-[4rem] p-12 md:p-24 flex flex-col md:flex-row items-center gap-16 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
             
             <div className="flex-1 text-white">
@@ -134,7 +134,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Button variant="natural" size="lg">Learn Our Process</Button>
+              <Button variant="natural" size="lg" className="w-full sm:w-auto">Learn Our Process</Button>
             </div>
             
             <div className="flex-1">

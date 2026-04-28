@@ -33,7 +33,7 @@ export default function DatasetsPage() {
       <div className="flex flex-col gap-8">
         {/* Main Content */}
         <div className="flex-grow">
-          <FadeIn delay={0.1} className="mb-10 max-w-2xl">
+          <FadeIn delay={0.1} className="mb-10 w-full max-w-2xl">
             <div className="relative group">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300 group-focus-within:text-brand-green transition-colors" />
               <input

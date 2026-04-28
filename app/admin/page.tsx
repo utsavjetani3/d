@@ -112,7 +112,7 @@ export default function AdminDashboard() {
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-black text-brand-green">{sale.price}</p>
-                    <p className={`text-[8px] font-black uppercase tracking-widest ${sale.status === 'Fulfilled' ? 'text-green-500' : 'text-amber-500'}`}>{sale.status}</p>
+                    <p className={`text-[8px] font-black uppercase tracking-widest ${sale.status === 'Fulfilled' ? 'text-brand-green' : 'text-amber-500'}`}>{sale.status}</p>
                   </div>
                 </div>
               ))}

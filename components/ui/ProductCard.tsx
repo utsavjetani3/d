@@ -34,7 +34,7 @@ export const ProductCard = ({ id, title, category, price, rating, benefit }: Pro
           <span className="text-[10px] text-gray-400 font-bold ml-1">{rating}</span>
         </div>
         
-        <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-brand-green transition-colors">
+        <h3 className="text-lg md:text-xl font-bold text-foreground mb-1 group-hover:text-brand-green transition-colors">
           {title}
         </h3>
         

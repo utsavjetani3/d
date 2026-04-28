@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Leaf, ArrowLeft } from "lucide-react";
+import { Leaf, ArrowLeft, Loader2 } from "lucide-react";
+import { useUser } from "@/lib/store";
+import { useRouter } from "next/navigation";
 
 interface AuthCardProps {
   initialType?: "login" | "register";
@@ -11,6 +13,11 @@ interface AuthCardProps {
 
 export default function AuthCard({ initialType = "login" }: AuthCardProps) {
   const [type, setType] = useState<"login" | "register">(initialType);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { login } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     setType(initialType);
@@ -34,10 +41,10 @@ export default function AuthCard({ initialType = "login" }: AuthCardProps) {
           <div className={`text-center ${isLogin ? "mb-[14px]" : "mb-[10px]"}`}>
             {isLogin ? (
               <div className="flex flex-col items-center">
-                <div className="w-[48px] h-[48px] bg-[#2E7D32] rounded-xl mb-2 flex items-center justify-center">
+                <div className="w-[48px] h-[48px] bg-[#1B5E20] rounded-xl mb-2 flex items-center justify-center">
                   <Leaf className="text-white w-6 h-6" />
                 </div>
-                <h2 className="text-[20px] font-black tracking-tighter text-[#2E7D32] leading-none uppercase">
+                <h2 className="text-[20px] font-black tracking-tighter text-[#1B5E20] leading-none uppercase">
                   NEEM DATUN
                 </h2>
                 <p className="text-[12px] font-bold text-gray-400 tracking-[0.2em] uppercase mt-1">
@@ -47,67 +54,81 @@ export default function AuthCard({ initialType = "login" }: AuthCardProps) {
               </div>
             ) : (
               <div className="flex flex-col items-center">
-                <h2 className="text-[24px] font-black text-[#2E7D32] tracking-tight leading-none mb-1">Create Account</h2>
+                <h2 className="text-[24px] font-black text-[#1B5E20] tracking-tight leading-none mb-1">Create Account</h2>
                 <p className="text-[13px] text-gray-500 font-bold">Join Neem Datun community</p>
               </div>
             )}
           </div>
 
-          <form className="flex flex-col overflow-hidden" onSubmit={(e) => e.preventDefault()}>
-            {!isLogin && (
-              <div className="mb-[10px]">
-                <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-[6px] ml-1">Full Name</label>
-                <input 
-                  type="text" 
-                  placeholder="Enter your name" 
-                  className="w-full h-[44px] px-4 bg-white border border-gray-200 rounded-[10px] focus:outline-none focus:border-[#4CAF50] transition-all font-semibold text-[13px]"
-                />
-              </div>
-            )}
+          <form className="flex flex-col overflow-hidden" onSubmit={(e) => {
+            e.preventDefault();
+            setLoading(true);
+            setTimeout(() => {
+              login(name, phone);
+              setLoading(false);
+              if (phone === "3344334434") {
+                router.push("/admin");
+              } else {
+                router.push("/");
+              }
+            }, 1000);
+          }}>
+            <div className="mb-[10px]">
+              <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-[6px] ml-1">Full Name</label>
+              <input 
+                type="text" 
+                placeholder="Enter your name" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="w-full h-[44px] px-4 bg-white border border-gray-200 rounded-[10px] focus:outline-none focus:border-[#4CAF50] transition-all font-semibold text-[13px]"
+              />
+            </div>
 
             <div className={isLogin ? "mb-[14px]" : "mb-[10px]"}>
               <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-[6px] ml-1">
                 {isLogin ? "NUMBER" : "PHONE NUMBER"}
               </label>
               <div className="flex gap-2">
-                <div className="h-[44px] w-[60px] bg-white border border-gray-200 rounded-[10px] flex items-center justify-center font-black text-[#2E7D32] text-[13px] shrink-0">
+                <div className="h-[44px] w-[60px] bg-white border border-gray-200 rounded-[10px] flex items-center justify-center font-black text-[#1B5E20] text-[13px] shrink-0">
                   +91
                 </div>
                 <input 
                   type="tel" 
                   placeholder="10-digit number" 
                   maxLength={10}
-                  className="flex-grow h-[44px] px-4 bg-white border border-gray-200 rounded-[10px] focus:outline-none focus:border-[#4CAF50] transition-all font-semibold text-[13px] tracking-widest"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                  className="flex-grow h-[44px] px-4 bg-white border border-gray-200 rounded-[10px] focus:outline-none focus:border-[#2E7D32] transition-all font-semibold text-[13px] tracking-widest"
                 />
               </div>
             </div>
 
             <div className={`flex flex-col ${isLogin ? "gap-3 pt-2" : "gap-[10px] pt-1"}`}>
-              <button className="w-full h-[46px] bg-gradient-to-r from-[#81C784] to-[#4CAF50] text-white font-black rounded-[12px] text-[14px] tracking-widest uppercase shadow-sm hover:opacity-90 transition-opacity">
-                SEND OTP
+              <button 
+                type="submit"
+                disabled={loading}
+                className="w-full h-[46px] bg-gradient-to-r from-[#2E7D32] to-[#1B5E20] text-white font-black rounded-[12px] text-[14px] tracking-widest uppercase shadow-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+              >
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (isLogin ? "SIGN IN" : "CREATE ACCOUNT")}
               </button>
-              
-              {!isLogin && (
-                <button className="w-full h-[46px] bg-[#2E7D32] text-white font-black rounded-[12px] text-[14px] tracking-widest uppercase shadow-md hover:opacity-90 transition-opacity">
-                  CREATE ACCOUNT
-                </button>
-              )}
             </div>
           </form>
 
           <div className={`text-center flex flex-col items-center ${isLogin ? "mt-[14px] gap-[14px]" : "mt-[12px] gap-[8px]"}`}>
             <button 
               onClick={() => setType(isLogin ? "register" : "login")}
-              className="text-[13px] font-bold text-gray-400 hover:text-[#2E7D32] transition-colors"
+              className="text-[13px] font-bold text-gray-400 hover:text-[#1B5E20] transition-colors"
             >
               {isLogin ? (
-                <>Don't have account? <span className="text-[#4CAF50] font-black uppercase ml-1">Create Account</span></>
+                <>Don't have account? <span className="text-[#2E7D32] font-black uppercase ml-1">Create Account</span></>
               ) : (
-                <>Already have an account? <span className="text-[#4CAF50] font-black uppercase ml-1">Sign In</span></>
+                <>Already have an account? <span className="text-[#2E7D32] font-black uppercase ml-1">Sign In</span></>
               )}
             </button>
             
-            <Link href="/" className="inline-flex items-center gap-2 text-[11px] font-black text-gray-400 hover:text-[#2E7D32] transition-colors uppercase tracking-[0.2em]">
+            <Link href="/" className="inline-flex items-center gap-2 text-[11px] font-black text-gray-400 hover:text-[#1B5E20] transition-colors uppercase tracking-[0.2em]">
               <ArrowLeft className="w-3 h-3" /> BACK TO HOME
             </Link>
           </div>

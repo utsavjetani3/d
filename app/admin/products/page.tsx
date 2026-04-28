@@ -33,20 +33,21 @@ export default function AdminProductsPage() {
         </div>
 
         <div className="bg-white rounded-[3rem] border border-brand-green/5 soft-shadow overflow-hidden">
-          <div className="p-6 border-b border-brand-green/5 flex flex-col sm:flex-row justify-between items-center gap-6 bg-brand-beige/20">
-            <div className="relative w-full sm:w-80">
+          <div className="p-6 border-b border-brand-green/5 flex flex-col md:flex-row justify-between items-center gap-6 bg-brand-beige/20">
+            <div className="relative w-full md:w-80">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
               <input 
                 type="text" 
                 placeholder="Search collection..." 
-                className="w-full pl-12 pr-6 py-3 bg-white border border-brand-green/5 rounded-2xl text-sm text-foreground focus:outline-none focus:ring-4 focus:ring-brand-green/5 transition-all"
+                className="w-full pl-12 pr-6 py-3 bg-white border border-brand-green/5 rounded-2xl text-sm text-foreground focus:outline-none focus:ring-4 focus:ring-brand-green/5 transition-all shadow-sm"
               />
             </div>
-            <div className="flex gap-4 w-full sm:w-auto">
-              <select className="bg-white border border-brand-green/5 rounded-2xl text-xs font-black uppercase tracking-widest text-gray-500 px-6 py-3 focus:outline-none focus:ring-4 focus:ring-brand-green/5 appearance-none grow sm:grow-0 cursor-pointer shadow-sm">
+            <div className="flex gap-4 w-full md:w-auto">
+              <select className="bg-white border border-brand-green/5 rounded-2xl text-xs font-black uppercase tracking-widest text-gray-500 px-6 py-3 focus:outline-none focus:ring-4 focus:ring-brand-green/5 appearance-none grow md:grow-0 cursor-pointer shadow-sm">
                 <option>All Categories</option>
                 <option>Traditional</option>
                 <option>Care Kits</option>
+                <option>Powder</option>
               </select>
             </div>
           </div>
@@ -54,7 +55,7 @@ export default function AdminProductsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-brand-green/5 text-[10px] uppercase tracking-[0.2em] text-gray-400 bg-white">
+                <tr className="border-b border-brand-green/5 text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-gray-400 bg-white">
                   <th className="p-8 font-black">Product</th>
                   <th className="p-8 font-black">Category</th>
                   <th className="p-8 font-black">Price</th>
